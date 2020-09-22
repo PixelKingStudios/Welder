@@ -1,37 +1,79 @@
-## Welcome to GitHub Pages
+## Welder - Lightweight Module For Model Welding
 
-You can use the [editor on GitHub](https://github.com/PixelKingStudios/Welder/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### What is Welder?
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Welder is an open-source module that makes it extremely easy to weld every `BasePart` in a model to it's `PrimaryPart`. It only takes two lines of code from another script and it's done! Welder can also "un-weld" if you want to undo the welding.
 
-### Markdown
+### How do get Welder?
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Welder can be required from another script using it's AssetID (5718676928) or can be purchased for free from Roblox's asset library [here](https://www.roblox.com/library/5718676928/Welder). To `require()` Welder from another script, use the following code bellow:
 
-```markdown
-Syntax highlighted code block
+````lua
+local Welder = require(5718676928)
+````
 
-# Header 1
-## Header 2
-### Header 3
+### How do I use Welder?
 
-- Bulleted
-- List
+#### Welding
 
-1. Numbered
-2. List
+To weld every `BasePart` of a model to it's `PrimaryPart`, use the following code:
 
-**Bold** and _Italic_ and `Code` text
+````lua
+Welder.weld(script.Parent) -- Assuming that the script is located inside of the model itself.
+````
 
-[Link](url) and ![Image](src)
-```
+#### Un-welding
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+To un-weld every `BasePart` of a model from it's `PrimaryPart`, use the following code:
 
-### Jekyll Themes
+````lua
+Welder.unweld(script.Parent) -- Assuming that the script is located inside of the model itself.
+````
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/PixelKingStudios/Welder/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+#### Welding without changing the `BasePart`'s anchored state
 
-### Support or Contact
+Welder will unanchor every `BasePart` it welds. To weld without changing the `BasePart`'s anchored state, use the following code:
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+````lua
+Welder.weldKeepAnchoredState(script.Parent) -- Assuming that the script is located inside of the model itself.
+````
+
+### Important things to note
+
+#### Object must be a Model
+
+Welder will only weld the descendants of a model, and will throw a warning in the output widow if it isn't. Welder may be updated in the future to work with other objects, but for now only models are supported.
+
+#### `PrimaryPart` is required
+
+Welder will throw a warning in the output window if the model's `PrimaryPart` is equal to `nil`. Welder needs to know what to weld everything to, so it uses the model's `PrimaryPart` as it's main part.
+
+#### Welding will unanchor
+
+Unless you're using `weldKeepAnchoredState()`, Welder will unanchor everything you weld. To prevent this, use the `weldKeepAnchoredState()` method instead.
+
+### Code samples
+
+Weld, then after 10 seconds un-weld:
+
+````lua
+local Welder = require(5718676928)
+local model = script.Parent -- path to folder
+
+Welder.weld(model)
+wait(10)
+Welder.unweld(model)
+````
+
+Loop through every model in a folder and weld their `BasePart` descendants:
+
+````lua
+local Welder = require(5718676928)
+local folder = script.Parent -- path to folder
+
+for _, descendant in pairs(folder:GetDescendants()) do
+  if descendant:IsA("Model") then
+    Welder.weld(descendant)
+  end
+end)
+````
