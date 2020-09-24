@@ -71,9 +71,9 @@ Loop through every model in a folder and weld their `BasePart` descendants:
 local Welder = require(5718676928)
 local folder = script.Parent -- path to folder
 
-for _, descendant in pairs(folder:GetDescendants()) do
-  if descendant:IsA("Model") then
-    Welder.weld(descendant)
+for _, model in pairs(folder:GetChildren()) do
+  if model:IsA("Model") then
+    Welder.weld(model)
   end
 end)
 ````
