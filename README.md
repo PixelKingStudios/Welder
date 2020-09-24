@@ -58,7 +58,7 @@ Weld, then after 10 seconds un-weld:
 
 ````lua
 local Welder = require(5718676928)
-local model = script.Parent -- path to folder
+local model = script.Parent -- path to model
 
 Welder.weld(model)
 wait(10)
