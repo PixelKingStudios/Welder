@@ -19,7 +19,7 @@ local Welder = require(5718676928)
 To weld every `BasePart` of a model to it's `PrimaryPart`, use the following code:
 
 ````lua
-Welder.weld(script.Parent) -- Assuming that the script is located inside of the model itself.
+Welder:Weld(script.Parent) -- Assuming that the script is located inside of the model itself.
 ````
 
 #### Un-welding
@@ -27,7 +27,7 @@ Welder.weld(script.Parent) -- Assuming that the script is located inside of the 
 To un-weld every `BasePart` of a model from it's `PrimaryPart`, use the following code:
 
 ````lua
-Welder.unweld(script.Parent) -- Assuming that the script is located inside of the model itself.
+Welder:Unweld(script.Parent) -- Assuming that the script is located inside of the model itself.
 ````
 
 #### Welding without changing the `BasePart`'s anchored state
@@ -35,7 +35,7 @@ Welder.unweld(script.Parent) -- Assuming that the script is located inside of th
 Welder will unanchor every `BasePart` it welds. To weld without changing the `BasePart`'s anchored state, use the following code:
 
 ````lua
-Welder.weldKeepAnchoredState(script.Parent) -- Assuming that the script is located inside of the model itself.
+Welder:WeldKeepAnchoredState(script.Parent) -- Assuming that the script is located inside of the model itself.
 ````
 
 ### Important things to note
@@ -50,7 +50,7 @@ Welder will throw a warning in the output window if the model's `PrimaryPart` is
 
 #### Welding will unanchor
 
-Unless you're using `weldKeepAnchoredState()`, Welder will unanchor everything you weld. To prevent this, use the `weldKeepAnchoredState()` method instead.
+Unless you're using `WeldKeepAnchoredState()`, Welder will unanchor everything you weld. To prevent this, use the `WeldKeepAnchoredState()` method instead.
 
 ### Code samples
 
@@ -60,9 +60,9 @@ Weld, then after 10 seconds un-weld:
 local Welder = require(5718676928)
 local model = script.Parent -- path to model
 
-Welder.weld(model)
+Welder:Weld(model)
 wait(10)
-Welder.unweld(model)
+Welder:Unweld(model)
 ````
 
 Loop through every model in a folder and weld their `BasePart` descendants:
@@ -73,7 +73,7 @@ local folder = script.Parent -- path to folder
 
 for _, model in pairs(folder:GetChildren()) do
   if model:IsA("Model") then
-    Welder.weld(model)
+    Welder:Weld(model)
   end
 end)
 ````
