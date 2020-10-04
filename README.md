@@ -52,6 +52,10 @@ Welder will throw a warning in the output window if the model's `PrimaryPart` is
 
 Unless you're using `WeldKeepAnchoredState()`, Welder will unanchor everything you weld. To prevent this, use the `WeldKeepAnchoredState()` method instead.
 
+#### Old methods no longer supported
+
+Methods such as `Welder.weld()` and `Welder.unweld()` are no longer supported, and have been replaced with methods such as `Welder:Weld()` and `Welder:Unweld()`. Using these old methods will not throw an error, but will instead output a warning. Models will no longer be effected by these old methods.
+
 ### Code samples
 
 Weld, then after 10 seconds un-weld:
