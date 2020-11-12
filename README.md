@@ -4,7 +4,7 @@
 
 Welder is an open-source module that makes it extremely easy to weld every `BasePart` in a model to it's `PrimaryPart`. It only takes two lines of code from another script and it's done! Welder can also "un-weld" if you want to undo the welding.
 
-### How do get Welder?
+### How to get Welder?
 
 Welder can be required from another script using it's AssetID (5718676928) or can be purchased for free from Roblox's asset library [here](https://www.roblox.com/library/5718676928/Welder). To `require()` Welder from another script, use the following code bellow:
 
@@ -58,7 +58,7 @@ Methods such as `Welder.weld()` and `Welder.unweld()` are no longer supported, a
 
 ### Code samples
 
-Weld, then after 10 seconds un-weld:
+Weld, then after 10 seconds Unweld:
 
 ````lua
 local Welder = require(5718676928)
@@ -75,9 +75,35 @@ Loop through every model in a folder and weld their `BasePart` descendants:
 local Welder = require(5718676928)
 local folder = script.Parent -- path to folder
 
-for _, model in pairs(folder:GetChildren()) do
-  if model:IsA("Model") then
-    Welder:Weld(model)
+for _, child in pairs(folder:GetChildren()) do
+  if child:IsA("Model") then
+    Welder:Weld(child)
+  end
+end)
+````
+
+Weld a model without changing its `BasePart` descendants' anchored states:
+
+````lua
+local Welder = require(5718676928)
+local model = script.Parent -- path to model
+
+Welder:WeldKeepAnchoredState(model)
+````
+
+Weld, then when PrimaryPart touched Unweld:
+
+````lua
+local Welder = require(5718676928)
+local model = script.Parent -- path to model
+
+Welder:Weld(model)
+local welded = true
+
+model.PrimaryPart.Touched:Connect(function(hit)
+  if welded then
+    Welder:Unweld(model)
+    welded = false
   end
 end)
 ````
