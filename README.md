@@ -91,7 +91,7 @@ local model = script.Parent -- path to model
 Welder:WeldKeepAnchoredState(model)
 ````
 
-Weld, then when PrimaryPart touched Unweld:
+Weld, then when `PrimaryPart` touched Unweld:
 
 ````lua
 local Welder = require(5718676928)
